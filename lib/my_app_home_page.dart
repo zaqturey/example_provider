@@ -1,4 +1,6 @@
+import 'package:example_provider/flavor.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MyAppHomePage extends StatefulWidget {
   MyAppHomePage({Key key, this.title}) : super(key: key);
@@ -19,9 +21,10 @@ class _MyAppHomePageState extends State<MyAppHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final flavor = Provider.of<Flavor>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(flavor.toString()),
       ),
       body: Center(
         child: Column(
