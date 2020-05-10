@@ -1,4 +1,3 @@
-import 'package:example_provider/counter.dart';
 import 'package:example_provider/flavor.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,8 +8,10 @@ class MyAppHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Using 'Provider.of<T>' registers the current Widget as a listener for the provider of type <T>
     final flavor = Provider.of<Flavor>(context);
-    final counter = Provider.of<Counter>(context, listen: false);
+    // by default 'counter' value will be '0' as it has been passed as the initial value.
+    final counter = Provider.of<ValueNotifier<int>>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text(flavor.toString()),
@@ -22,7 +23,7 @@ class MyAppHomePage extends StatelessWidget {
             Text(
               'You have pushed the button this many times:',
             ),
-            Consumer<Counter>(
+            Consumer<ValueNotifier<int>>(
               builder: (context, counter, child) => Text(
                 '${counter.value}',
                 style: Theme.of(context).textTheme.headline4,
@@ -32,7 +33,7 @@ class MyAppHomePage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: counter.increment,
+        onPressed: () => counter.value++,
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

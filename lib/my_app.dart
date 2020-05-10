@@ -1,4 +1,3 @@
-import 'package:example_provider/counter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,8 +12,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: ChangeNotifierProvider<Counter>(
-        create: (context) => Counter(),
+      home: ChangeNotifierProvider<ValueNotifier<int>>(
+        // '0' will be passed as the initial value to the constructor
+        create: (context) => ValueNotifier<int>(0),
         child: MyAppHomePage(title: 'Flutter Demo Home Page'),
       ),
     );
